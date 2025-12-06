@@ -1,5 +1,53 @@
 import { CombinedOrder, OrderDiff } from "../types";
 
+
+const HISTORY_TRANSLATIONS_IGNORED = [
+    "details.tasks.registration.orderDetails.vin",
+    "details.tasks.registration.regData.orderDetails.vin",
+    "details.tasks.finalPayment.data.vin",
+    "details.tasks.tradeIn.isMatched",
+    "details.tasks.registration.isMatched",
+    "details.tasks.registration.orderDetails.vehicleModelYear",
+    "details.state",
+    "details.strings",
+    "details.scheduling.card",
+    "details.scheduling.strings",
+    "details.tasks.carbonCredit.card",
+    "details.tasks.carbonCredit.strings.",
+    "details.tasks.finalPayment.card.",
+    "details.tasks.finalPayment.strings.",
+    "details.tasks.scheduling.card.",
+    "details.tasks.scheduling.strings.",
+    "details.tasks.scheduling.isDeliveryEstimatesEnabled",
+    "details.tasks.registration.orderDetails.isAvailableForMatch",
+    "details.tasks.finalPayment.data.isAvailableForMatch",
+    "details.tasks.finalPayment.data.deliveryReadinessDetail.",
+    "details.tasks.finalPayment.data.deliveryReadiness.",
+    "details.tasks.finalPayment.data.agreementDetails",
+    "details.tasks.finalPayment.data.vehicleId",
+    "details.tasks.deliveryAcceptance.gates",
+    "details.tasks.deliveryAcceptance.card.",
+    "details.tasks.deliveryAcceptance.strings.",
+    "details.tasks.deliveryDetails.regData.reggieRegistrationStatus",
+    "details.tasks.deliveryDetails.strings.",
+    "details.tasks.deliveryDetails.card.",
+    "details.tasks.registration.card.",
+    "details.tasks.registration.regData.reggieRegistrationStatus",
+    "details.tasks.registration.strings.",
+    "details.tasks.finalPayment.complete",
+    "details.tasks.finalPayment.data.finalPaymentStatus",
+    "details.tasks.scheduling.apptDateTimeAddressStr",
+    "details.tasks.scheduling.isInventoryOrMatched",
+    "details.tasks.finalPayment.data.hasFinalInvoice",
+    "details.tasks.finalPayment.data.hasActiveInvoice",
+    "details.tasks.finalPayment.data.selfSchedulingDetails.deliveryLocationId",
+    "details.tasks.finalPayment.data.selfSchedulingDetails.",
+    "details.tasks.financing.card.",
+    "details.tasks.financing.strings.",
+    "details.tasks.tradeIn.card.",
+    "details.tasks.tradeIn.strings."
+]
+
 // --- PKCE Helpers ---
 
 function base64urlencode(buffer: ArrayBuffer): string {
@@ -74,11 +122,15 @@ export function compareObjects(oldObj: any, newObj: any, path: string = '', diff
         const currentPath = path ? `${path}.${key}` : key;
         const oldVal = a[key];
         const newVal = b[key];
+        
+        if (HISTORY_TRANSLATIONS_IGNORED.includes(currentPath)) {
+            continue;
+        }
 
         if (Object.is(oldVal, newVal)) {
             continue; // Values are strictly equal, no change.
         }
-
+        
         if (isObject(oldVal) && isObject(newVal)) {
             compareObjects(oldVal, newVal, currentPath, diffs);
         } else if (Array.isArray(oldVal) && Array.isArray(newVal)) {
