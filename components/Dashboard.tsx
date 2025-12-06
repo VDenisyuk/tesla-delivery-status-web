@@ -244,7 +244,6 @@ const Dashboard: React.FC<DashboardProps> = ({ tokens, onLogout, handleRefreshAn
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Delivery Status</h1>
         </div>
         <div className="flex items-center space-x-1 sm:space-x-2">
-          <BuyMeACoffeeButton />
            <a
             href={GITHUB_REPO_URL}
             target="_blank"
