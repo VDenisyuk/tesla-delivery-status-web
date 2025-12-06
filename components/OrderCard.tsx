@@ -361,7 +361,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ combinedOrder, diff, hasNewChange
                   })()}
 
                   <DetailItem icon={<LicensePlateIcon />} label="License Plate" value={licensePlate.value} diffValue={licensePlate.diffValue} tooltipText="The official license plate number assigned to your vehicle." />
-                  <DetailItem icon={<ETAIcon />} label="ETA to Delivery Center" value={eta.value} diffValue={eta.diffValue} tooltipText="Estimated Time of Arrival of your vehicle at the designated delivery center. This is not your delivery date." />
+                  <DetailItem icon={<ETAIcon />} label="ETA to Delivery Center" value={new Date(eta.value).toDateString()} diffValue={eta.diffValue} tooltipText="Estimated Time of Arrival of your vehicle at the designated delivery center. This is not your delivery date." />
 
                   <div className="md:col-span-2">
                       <DetailItem icon={<ClockIcon />} label="Delivery Window" value={deliveryWindow.value} diffValue={deliveryWindow.diffValue} tooltipText="The timeframe provided by Tesla during which your delivery is expected to take place. This may change." />
@@ -373,8 +373,8 @@ const OrderCard: React.FC<OrderCardProps> = ({ combinedOrder, diff, hasNewChange
                   <DetailItem icon={<CarIcon />} label="Vehicle Location" value={vehicleLocation.value} diffValue={vehicleLocation.diffValue} tooltipText="The last reported location of your vehicle in Tesla's logistics system." />
                   <DetailItem icon={<DeliveryIcon />} label="Delivery Method" value={deliveryMethod.value} diffValue={deliveryMethod.diffValue} tooltipText="How your vehicle will be delivered (e.g., Pickup at a Tesla center, Home Delivery)." />
                   <DetailItem icon={<GeoIcon />} label="Delivery Center" value={deliveryCenter.value} diffValue={deliveryCenter.diffValue} tooltipText="The Tesla location where you will pick up your vehicle." />
-                  <DetailItem icon={<GaugeIcon />} label="Odometer" value={odometer.value} diffValue={odometer.diffValue} tooltipText="The vehicle's mileage at the time of the last data sync. It's normal for new cars to have a few miles from factory testing and transport." />
-                  <DetailItem icon={<CalendarIcon />} label="Order Booked Date" value={orderBookedDate.value} diffValue={orderBookedDate.diffValue} tooltipText="The date your order was officially confirmed and placed in the production queue." />
+                  <DetailItem icon={<GaugeIcon />} label="Odometer" value={parseFloat(odometer.value).toFixed(3)} diffValue={odometer.diffValue} tooltipText="The vehicle's mileage at the time of the last data sync. It's normal for new cars to have a few miles from factory testing and transport." />
+                  <DetailItem icon={<CalendarIcon />} label="Order Booked Date" value={new Date(orderBookedDate.value).toDateString()} diffValue={orderBookedDate.diffValue} tooltipText="The date your order was officially confirmed and placed in the production queue." />
                   
                   {order.isB2b && <div className="md:col-span-2"><DetailItem icon={<CompanyIcon />} label="Company" value={companyName.value} diffValue={companyName.diffValue} tooltipText="The company name associated with the order, typically for business or fleet purchases." /></div>}
               </div>

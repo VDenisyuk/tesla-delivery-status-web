@@ -16,7 +16,7 @@ const STAGES: Stage[] = [
     label: 'Order Placed',
     icon: TimelinePlacedIcon,
     isComplete: (order) => !!order.details?.tasks?.registration?.orderDetails?.orderBookedDate || order.order.orderStatus.toLowerCase().includes('book'),
-    date: (order) => order.details?.tasks?.registration?.orderDetails?.orderBookedDate ? new Date(order.details.tasks.registration.orderDetails.orderBookedDate).toLocaleDateString() : null,
+    date: (order) => order.details?.tasks?.registration?.orderDetails?.orderBookedDate ? new Date(order.details.tasks.registration.orderDetails.orderBookedDate).toDateString() : null,
   },
   {
     id: 'vin',
@@ -30,7 +30,7 @@ const STAGES: Stage[] = [
     label: 'In Transit',
     icon: DeliveryIcon,
     isComplete: (order) => !!order.details?.tasks?.finalPayment?.data?.etaToDeliveryCenter,
-    date: (order) => order.details?.tasks?.finalPayment?.data?.etaToDeliveryCenter || null,
+    date: (order) => new Date(order.details?.tasks?.finalPayment?.data?.etaToDeliveryCenter).toDateString() || null,
   },
   {
     id: 'ready',
