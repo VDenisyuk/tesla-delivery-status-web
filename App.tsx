@@ -163,7 +163,6 @@ const App: React.FC = () => {
     <Dashboard 
       tokens={tokens} 
       onLogout={handleLogout}
-      handleRefreshAndRetry={handleRefreshAndRetry}
       theme={theme}
       toggleTheme={toggleTheme}
     />

@@ -183,10 +183,10 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ error, onUrlSubmit, isSubmitt
           <TeslaLogo className={`w-24 h-24 mx-auto text-gray-900 dark:text-white transition-colors duration-300 ${rainbowMode ? 'animate-rainbow' : ''}`}/>
         </div>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Delivery Status
+          Tesla Auth Tokens
         </h1>
         <p className="text-gray-600 dark:text-tesla-gray-300 mb-6">
-          Log in with your Tesla account to track your vehicle order.
+          Log in with your Tesla account to get your auth tokens.
         </p>
 
         <div className="text-sm bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-500/30 text-blue-800 dark:text-blue-200 rounded-lg p-3 mb-6 text-left">
