@@ -39,6 +39,7 @@ import {
   Map,
   RectangleHorizontal,
   ArrowRightLeft,
+  Trash2
 } from 'lucide-react';
 
 export const TeslaLogo: React.FC<{ className?: string }> = ({ className }) => (
@@ -126,3 +127,4 @@ export const LicensePlateIcon = RectangleHorizontal;
 
 // Icon for Trade-In
 export const TradeInIcon = ArrowRightLeft;
+export const TrashBinIcon = Trash2;
