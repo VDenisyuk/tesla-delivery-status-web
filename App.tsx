@@ -25,7 +25,7 @@ const App: React.FC = () => {
   });
 
   const toggleTheme = useCallback(() => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    setTheme((prevTheme : Theme) => prevTheme === 'light' ? 'dark' : 'light');
   }, []);
 
   useEffect(() => {
