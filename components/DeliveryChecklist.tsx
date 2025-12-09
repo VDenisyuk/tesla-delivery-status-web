@@ -37,9 +37,9 @@ const DeliveryChecklist: React.FC<DeliveryChecklistProps> = ({ orderReferenceNum
 
   useEffect(() => {
     try {
-        if (typeof localStorage !== 'undefined') {
-            localStorage.setItem(storageKey, JSON.stringify(checkedItems));
-        }
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(storageKey, JSON.stringify(checkedItems));
+      }
     } catch (error) {
       console.error("Error saving checklist state to localStorage", error);
     }

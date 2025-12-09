@@ -48,11 +48,11 @@ const ChangeItem: React.FC<{ label: string; from: any; to: any }> = ({ label, fr
 const HistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose, orderReferenceNumber }) => {
   const [history, setHistory] = useState<HistoricalSnapshot[]>([]);
   const [isFiltered, setIsFiltered] = useState(false);
-  
+
   const setFilter = (event) => {
     setIsFiltered(event.target.checked);
   };
-  
+
   useEffect(() => {
     if (isOpen) {
       try {
@@ -77,9 +77,9 @@ const HistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose, orderRefer
     if (history.length === 0) {
       return <p className="text-center text-gray-500 dark:text-tesla-gray-400 p-8">No history recorded for this order yet.</p>;
     }
-    
+
     const reversedHistory = [...history].reverse();
-    
+
     return reversedHistory.map((snapshot, index) => {
       const previousSnapshot = reversedHistory[index + 1] || null;
       const dateTime = new Date(snapshot.timestamp);
@@ -89,30 +89,30 @@ const HistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose, orderRefer
       // This is the very first snapshot, which establishes the baseline.
       if (!previousSnapshot) {
         return (
-            <div key={snapshot.timestamp} className="relative pl-8">
-              <span className="absolute left-0 top-1.5 h-full w-0.5 bg-gray-200 dark:bg-tesla-gray-700"></span>
-              <div className="absolute left-[-5px] top-3 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white dark:ring-tesla-gray-800"></div>
-              
-              <div className="pb-8">
-                <h4 className="font-semibold text-gray-800 dark:text-white">{formattedDate}
-                    <span className="text-sm font-normal text-gray-500 dark:text-tesla-gray-400 ml-2">{formattedTime}</span>
-                </h4>
-                <div className="mt-3 p-4 bg-gray-50 dark:bg-tesla-gray-900/50 rounded-lg border border-gray-200 dark:border-tesla-gray-700/50">
-                    <p className="text-sm font-semibold mb-2 text-gray-600 dark:text-tesla-gray-300">
-                        Initial State Recorded
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-tesla-gray-400">
-                        The first check has established a baseline. Any future changes to your order will be logged here.
-                    </p>
-                </div>
+          <div key={snapshot.timestamp} className="relative pl-8">
+            <span className="absolute left-0 top-1.5 h-full w-0.5 bg-gray-200 dark:bg-tesla-gray-700"></span>
+            <div className="absolute left-[-5px] top-3 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white dark:ring-tesla-gray-800"></div>
+
+            <div className="pb-8">
+              <h4 className="font-semibold text-gray-800 dark:text-white">{formattedDate}
+                <span className="text-sm font-normal text-gray-500 dark:text-tesla-gray-400 ml-2">{formattedTime}</span>
+              </h4>
+              <div className="mt-3 p-4 bg-gray-50 dark:bg-tesla-gray-900/50 rounded-lg border border-gray-200 dark:border-tesla-gray-700/50">
+                <p className="text-sm font-semibold mb-2 text-gray-600 dark:text-tesla-gray-300">
+                  Initial State Recorded
+                </p>
+                <p className="text-sm text-gray-500 dark:text-tesla-gray-400">
+                  The first check has established a baseline. Any future changes to your order will be logged here.
+                </p>
               </div>
             </div>
+          </div>
         );
       }
-      
+
       const diffs = compareObjects(previousSnapshot.data, snapshot.data);
       const allDiffs = Object.entries(diffs);
-      
+
       // If there are no changes, don't render an entry for this snapshot.
       if (allDiffs.length === 0) {
         return null;
@@ -120,22 +120,22 @@ const HistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose, orderRefer
 
       return (
         <div key={snapshot.timestamp} className="relative pl-8">
-            <span className="absolute left-0 top-1.5 h-full w-0.5 bg-gray-200 dark:bg-tesla-gray-700"></span>
-            <div className="absolute left-[-5px] top-3 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white dark:ring-tesla-gray-800"></div>
-          
+          <span className="absolute left-0 top-1.5 h-full w-0.5 bg-gray-200 dark:bg-tesla-gray-700"></span>
+          <div className="absolute left-[-5px] top-3 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white dark:ring-tesla-gray-800"></div>
+
           <div className="pb-8">
             <h4 className="font-semibold text-gray-800 dark:text-white">{formattedDate}
-                <span className="text-sm font-normal text-gray-500 dark:text-tesla-gray-400 ml-2">{formattedTime}</span>
+              <span className="text-sm font-normal text-gray-500 dark:text-tesla-gray-400 ml-2">{formattedTime}</span>
             </h4>
             <div className="mt-3 p-4 bg-gray-50 dark:bg-tesla-gray-900/50 rounded-lg border border-gray-200 dark:border-tesla-gray-700/50">
-                <p className="text-sm font-semibold mb-2 text-gray-600 dark:text-tesla-gray-300">
-                    Changes Detected:
-                </p>
-                <ul className="divide-y divide-gray-200 dark:divide-tesla-gray-700/50">
-                    {allDiffs.map(([key, { old: oldVal, new: newVal }]) => (
-                        <ChangeItem key={key} label={getLabel(key)} from={oldVal} to={newVal} />
-                    ))}
-                </ul>
+              <p className="text-sm font-semibold mb-2 text-gray-600 dark:text-tesla-gray-300">
+                Changes Detected:
+              </p>
+              <ul className="divide-y divide-gray-200 dark:divide-tesla-gray-700/50">
+                {allDiffs.map(([key, { old: oldVal, new: newVal }]) => (
+                  <ChangeItem key={key} label={getLabel(key)} from={oldVal} to={newVal} />
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -157,7 +157,7 @@ const HistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose, orderRefer
       >
         <header className="flex items-center justify-between p-5 border-b border-gray-200 dark:border-tesla-gray-700 flex-shrink-0">
           <h2 id="history-modal-title" className="text-xl font-bold text-gray-900 dark:text-white">Order History</h2>
-          
+
           <button
             onClick={onClose}
             className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-tesla-gray-700 transition-all duration-150 active:scale-90 active:bg-gray-300 dark:active:bg-tesla-gray-600"

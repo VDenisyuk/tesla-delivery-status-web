@@ -45,9 +45,9 @@ const Dashboard: React.FC<DashboardProps> = ({ tokens, onLogout, handleRefreshAn
     } else if (newClickCount >= 7) {
       setRainbowMode(prev => !prev);
     }
-    
+
     clickTimeoutRef.current = window.setTimeout(() => {
-        setLogoClicks(0);
+      setLogoClicks(0);
     }, 1500);
   }, [logoClicks]);
 
@@ -72,22 +72,22 @@ const Dashboard: React.FC<DashboardProps> = ({ tokens, onLogout, handleRefreshAn
         setLoading(false);
         return;
       }
-      
+
       const latestDiffs: Record<string, OrderDiff> = {};
 
       for (const newCombinedOrder of newOrders) {
         const rn = newCombinedOrder.order.referenceNumber;
         const historyKey = `tesla-order-history-${rn}`;
-        
+
         let history: HistoricalSnapshot[] = [];
         try {
-            const storedHistoryJson = localStorage.getItem(historyKey);
-            if(storedHistoryJson) {
-                history = JSON.parse(storedHistoryJson);
-            }
+          const storedHistoryJson = localStorage.getItem(historyKey);
+          if (storedHistoryJson) {
+            history = JSON.parse(storedHistoryJson);
+          }
         } catch (e) {
-            console.error("Failed to parse history from localStorage for", rn, e);
-            history = [];
+          console.error("Failed to parse history from localStorage for", rn, e);
+          history = [];
         }
 
         const lastSnapshotData = history.length > 0 ? history[history.length - 1].data : null;
@@ -107,7 +107,7 @@ const Dashboard: React.FC<DashboardProps> = ({ tokens, onLogout, handleRefreshAn
 
       setOrders(newOrders);
       setDiffs(latestDiffs);
-      
+
       if (Object.keys(latestDiffs).length > 0) {
         setToast({ message: 'New changes detected!', type: 'success' });
       } else if (isManualRefresh) {
@@ -159,7 +159,7 @@ const Dashboard: React.FC<DashboardProps> = ({ tokens, onLogout, handleRefreshAn
         </>
       );
     }
-    
+
     if (loading && orders.length === 0) {
       return (
         <div className="flex flex-col items-center justify-center text-center mt-20">
@@ -172,10 +172,10 @@ const Dashboard: React.FC<DashboardProps> = ({ tokens, onLogout, handleRefreshAn
     if (error) {
       return (
         <div className="flex justify-center mt-10">
-            <div className="text-center bg-red-100 dark:bg-tesla-red/10 border border-red-200 dark:border-tesla-red text-red-700 dark:text-tesla-red px-6 py-4 rounded-lg max-w-md">
-                <p className="font-bold text-lg">An Error Occurred</p>
-                <p className="mt-1">{error}</p>
-            </div>
+          <div className="text-center bg-red-100 dark:bg-tesla-red/10 border border-red-200 dark:border-tesla-red text-red-700 dark:text-tesla-red px-6 py-4 rounded-lg max-w-md">
+            <p className="font-bold text-lg">An Error Occurred</p>
+            <p className="mt-1">{error}</p>
+          </div>
         </div>
       );
     }
@@ -216,35 +216,35 @@ const Dashboard: React.FC<DashboardProps> = ({ tokens, onLogout, handleRefreshAn
     }
 
     return (
-        <div className="flex justify-center mt-10">
-            <div className="text-center bg-white dark:bg-tesla-gray-800/50 border border-gray-200 dark:border-tesla-gray-700 p-10 rounded-2xl shadow-sm max-w-md">
-                <h2 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">No Orders Found</h2>
-                <p className="text-gray-500 dark:text-tesla-gray-400">We couldn't find any orders associated with your account.</p>
-            </div>
+      <div className="flex justify-center mt-10">
+        <div className="text-center bg-white dark:bg-tesla-gray-800/50 border border-gray-200 dark:border-tesla-gray-700 p-10 rounded-2xl shadow-sm max-w-md">
+          <h2 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">No Orders Found</h2>
+          <p className="text-gray-500 dark:text-tesla-gray-400">We couldn't find any orders associated with your account.</p>
         </div>
+      </div>
     );
   };
 
   const iconButtonClasses = "p-2 rounded-full hover:bg-gray-200 dark:hover:bg-tesla-gray-700 transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-100 dark:focus-visible:ring-offset-tesla-gray-900 active:scale-90 active:bg-gray-300 dark:active:bg-tesla-gray-600";
-  
+
   return (
     <div className="min-h-screen w-full max-w-screen-2xl mx-auto p-4 sm:p-6 lg:p-8">
       {toast && <Toast key={Date.now()} message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
-      
+
       <header className="flex justify-between items-center mb-8 pb-4 border-b border-gray-200 dark:border-tesla-gray-700/50">
         <div className="flex items-center space-x-4">
-            <div 
-              onClick={handleLogoClick}
-              className="cursor-pointer p-1 -m-1 rounded-full select-none"
-              role="button"
-              aria-label="Tesla Logo Easter Egg"
-            >
-              <TeslaLogo className={`w-8 h-8 transition-colors duration-300 ${rainbowMode ? 'animate-rainbow' : 'text-tesla-red'}`} />
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Delivery Status</h1>
+          <div
+            onClick={handleLogoClick}
+            className="cursor-pointer p-1 -m-1 rounded-full select-none"
+            role="button"
+            aria-label="Tesla Logo Easter Egg"
+          >
+            <TeslaLogo className={`w-8 h-8 transition-colors duration-300 ${rainbowMode ? 'animate-rainbow' : 'text-tesla-red'}`} />
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Delivery Status</h1>
         </div>
         <div className="flex items-center space-x-1 sm:space-x-2">
-           <a
+          <a
             href={GITHUB_REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -253,14 +253,14 @@ const Dashboard: React.FC<DashboardProps> = ({ tokens, onLogout, handleRefreshAn
           >
             <GithubIcon className="w-6 h-6" />
           </a>
-           <button
+          <button
             onClick={toggleTheme}
             className={iconButtonClasses}
             aria-label="Toggle Theme"
           >
             {theme === 'dark' ? <SunIcon className="w-6 h-6" /> : <MoonIcon className="w-6 h-6" />}
           </button>
-          
+
           {mockOrder ? (
             <Tooltip text="Reset to live data from Tesla API">
               <button
@@ -296,7 +296,7 @@ const Dashboard: React.FC<DashboardProps> = ({ tokens, onLogout, handleRefreshAn
         {renderContent()}
       </main>
 
-      <AdminPanel 
+      <AdminPanel
         isOpen={isAdminPanelOpen}
         onClose={() => setIsAdminPanelOpen(false)}
         onApply={handleApplyMockJson}
