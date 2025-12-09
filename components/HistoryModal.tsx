@@ -157,29 +157,7 @@ const HistoryModal: React.FC<HistoryModalProps> = ({ isOpen, onClose, orderRefer
       >
         <header className="flex items-center justify-between p-5 border-b border-gray-200 dark:border-tesla-gray-700 flex-shrink-0">
           <h2 id="history-modal-title" className="text-xl font-bold text-gray-900 dark:text-white">Order History</h2>
-          <label className="flex items-center cursor-pointer">
-            <span className="mr-3 text-white-700 font-medium">
-              Full 
-            </span>
-
-            <div className="relative">
-              <input 
-                onChange={setFilter}
-                checked={isFiltered} 
-                type="checkbox" 
-                id="toggle" 
-                className="sr-only peer" 
-              />
-              
-              <div className="block bg-gray-600 w-14 h-8 rounded-full peer-checked:bg-blue-600 transition"></div>
-              
-              <div className="absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition transform peer-checked:translate-x-6"></div>
-            </div>
-            
-            <span className="ml-3 text-white-700 font-medium">
-              Filtered
-            </span>
-          </label>
+          
           <button
             onClick={onClose}
             className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-tesla-gray-700 transition-all duration-150 active:scale-90 active:bg-gray-300 dark:active:bg-tesla-gray-600"
