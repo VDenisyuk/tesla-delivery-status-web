@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
+    "removeComments": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "module": "ESNext",
