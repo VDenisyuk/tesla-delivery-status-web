@@ -90,6 +90,8 @@ export const DRIVE_UNIT_MAP: Record<string, Record<string, string>> = {
     'C': 'Performance AWD',
     'G': 'Standard Range RWD',
     'H': 'Long Range RWD',
+    'K': 'Long Range AWD',
+    'L': 'Performance AWD'
   },
   'C': { // Cybertruck
       'D': 'Dual Motor',
