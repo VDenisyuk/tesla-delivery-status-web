@@ -173,8 +173,8 @@ const OrderCard: React.FC<OrderCardProps> = ({ combinedOrder, diff, hasNewChange
     return TESLA_STORES[locationCode] || `Unknown Code (${locationCode})`;
   };
 
-  const getOdometer = () => {
-    const odometerValue = details?.tasks?.registration?.orderDetails?.vehicleOdometer;
+  const getOdometer = (odometerValue: any) => {
+    //const odometerValue = details?.tasks?.registration?.orderDetails?.vehicleOdometer;
     if (!odometerValue) return 'N/A';
     return `${odometerValue} ${details?.tasks?.registration?.orderDetails?.vehicleOdometerType || ''}`.trim();
   }
