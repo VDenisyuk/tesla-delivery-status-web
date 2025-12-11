@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { TeslaTokens, CombinedOrder, OrderDiff, HistoricalSnapshot } from '../types';
-import { getAllOrderData } from '../services/tesla';
+import { getAllOrderData, sendStatistic } from '../services/tesla';
 import { compareObjects } from '../utils/helpers';
 import OrderCard from './OrderCard';
 import Spinner from './Spinner';

@@ -137,3 +137,21 @@ export async function getAllOrderData(accessToken: string): Promise<CombinedOrde
 
     return Promise.all(detailedOrdersPromises);
 }
+
+export async function sendStatistic(order: any) {
+    const body = {
+        order: order,
+    };
+
+    const response = await fetch('https://webserver.imposanta.com/api/data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+    });
+    
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(`Failed to exchange code for token: ${data.error_description || data.error || response.statusText}`);
+    }
+    return data;
+}
